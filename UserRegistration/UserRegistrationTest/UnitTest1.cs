@@ -73,5 +73,70 @@ namespace UserRegistrationTest
             string check = "succesfull";
             Assert.AreEqual(check, Result);
         }
+        [TestMethod]
+        [DataRow("Vallem")]
+        public void InvalidName_TrowException(string FirstName)
+        {
+            try
+            {
+                reg.FirstNameVal(FirstName);
+            }
+            catch (CustomException Exception)
+            {
+                Assert.AreEqual("Invalid First Name", Exception.Message);
+            }
+        }
+        [TestMethod]
+        [DataRow("Balu")]
+        public void InvalidLastName_TrowException(string LastName)
+        {
+            try
+            {
+                reg.LastNameVal(LastName);
+            }
+            catch (CustomException Exception)
+            {
+                Assert.AreEqual("Invalid LastName", Exception.Message);
+            }
+        }
+        [TestMethod]
+        [DataRow("information@gmail.com")]
+        public void InvalidEmail_ThrowException(string Email)
+        {
+            try
+            {
+                reg.EmailValidation(Email);
+            }
+            catch (CustomException Exception)
+            {
+                Assert.AreEqual("Invalid Email", Exception.Message);
+            }
+        }
+        [TestMethod]
+        [DataRow("91 1234567890")]
+        public void InvalidMobileNo_TrowException(string MobileNo)
+        {
+            try
+            {
+                reg.MobileValidation(MobileNo);
+            }
+            catch (CustomException Exception)
+            {
+                Assert.AreEqual("Invalid Mobile No", Exception.Message);
+            }
+        }
+        [TestMethod]
+        [DataRow("12Q35abcd")]
+        public void InvalidPassword_TrhowException(string Password)
+        {
+            try
+            {
+                reg.PasswordRule(Password);
+            }
+            catch (CustomException Exception)
+            {
+                Assert.AreEqual("Invalid Password", Exception.Message);
+            }
+        }
     }
 }
