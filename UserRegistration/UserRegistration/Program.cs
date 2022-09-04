@@ -5,58 +5,70 @@ namespace UserRegistration
 {
    public class Program
     {
-        public static string REGEX_PATTERN = "^[A-Z]{1}[a-zA-Z]{2,}$";
-        public static Program p = new Program();
+        public static string REGEX_PATTERN = "^[A-Z]{1}[a-zA-Z]{2,}";
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome_To_UserRegistration_RegeEx");
+            FirstNameVal();
+            LastNameVal();
+            EmailValidation();
+            MobileValidation();
+            PasswordRule();
+        }
+        public static void FirstNameVal()
+        {
+            Regex rg = new Regex(REGEX_PATTERN);
             Console.Write("Enter First Name: ");
-            string FirstName = Console.ReadLine();
-            Console.WriteLine(p.FirstNameVal(FirstName));
+            string first_name = Console.ReadLine();
+            bool validate = rg.IsMatch(first_name);
+            if (validate)
+                Console.WriteLine("Name is Valid : " + first_name);
+            else
+                Console.WriteLine("Invalid FirstName");
+        }
+        public static void LastNameVal()
+        {
+            Regex rg = new Regex(REGEX_PATTERN);
             Console.Write("Enter Last Name: ");
-            string LastName = Console.ReadLine();
-            Console.WriteLine(p.LastNameVal(LastName));
-            Console.Write("Enter E-mail: ");
-            string Email = Console.ReadLine();
-            Console.WriteLine(p.EmailValidation(Email));
-            Console.Write("Enter Mobile_NO: ");
-            string mobile = Console.ReadLine();
-            Console.WriteLine(p.MobileValidation(mobile));
-            Console.Write("Enter Password : ");
-            string password = Console.ReadLine();
-            Console.WriteLine(p.PasswordRule(password));
-        }
-        public bool FirstNameVal(string first_name)
-        {
-            Regex rg = new Regex(REGEX_PATTERN);
-            return rg.IsMatch(first_name); ;
-        }
-        public bool LastNameVal(string last_name)
-        {
-            Regex rg = new Regex(REGEX_PATTERN);
+            string last_name = Console.ReadLine();
             bool validate = rg.IsMatch(last_name);
-            return validate;
+            if (validate)
+                Console.WriteLine("Name is Valid : " + last_name);
+            else
+                Console.WriteLine("Invalid LastName");
         }
-        public bool EmailValidation(string email)
+        public static void EmailValidation()
         {
             string EMAIL_PATTERN = "^[a-zA-Z0-9]+[.(a-zA-Z0-9)]*(\\@)[a-zA-Z0-9]+(\\.)[a-z]{2,3}[.(a-z)]*$";
             Regex rg = new Regex(EMAIL_PATTERN);
+            Console.Write("Enter E-mail: ");
+            string email = Console.ReadLine();
             bool validate = rg.IsMatch(email);
-            return validate;
+            if (validate)
+                Console.WriteLine("Email is valid : " + email);
+            else
+                Console.WriteLine("Invalid E-mail.");
         }
-        public bool MobileValidation(string mobile)
+        public static void MobileValidation()
         {
             string MobilePattern = "^(91){1}[ ]+[0-9]{10}$";
             Regex rg = new Regex(MobilePattern);
+            Console.Write("Enter Mobile_NO: ");
+            string mobile = Console.ReadLine();
             bool validate = rg.IsMatch(mobile);
-            return validate;
+            if (validate)
+                Console.WriteLine("Mobile is valid : " + mobile);
+            else
+                Console.WriteLine("Invalid Mobile..");
         }
-        public bool PasswordRule(string password)
+        public static void PasswordRule()
         {
             string PasswordPattern = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[~!@#$%^&*.-])[a-zA-Z0-9].{8,}$";
             Regex rg = new Regex(PasswordPattern);
+            Console.Write("Enter Password : ");
+            string password = Console.ReadLine();
             bool validate = rg.IsMatch(password);
-            return validate;
+            Console.WriteLine(validate);
         }
     }
 }
