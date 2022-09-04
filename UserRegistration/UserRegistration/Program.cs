@@ -13,6 +13,7 @@ namespace UserRegistration
             FirstNameVal();
             LastNameVal();
             EmailValidation();
+            MobileValidation();
         }
         public static void FirstNameVal()
         {
@@ -46,6 +47,18 @@ namespace UserRegistration
                 Console.WriteLine("Email is valid : " + email);
             else
                 Console.WriteLine("Invalid E-mail.");
+        }
+        public static void MobileValidation()
+        {
+            string MobilePattern = "^(91){1}[ ]+[0-9]{10}$";
+            Regex rg = new Regex(MobilePattern);
+            Console.Write("Enter Mobile_NO: +");
+            string mobile = Console.ReadLine();
+            bool validate = rg.IsMatch(mobile);
+            if (validate)
+                Console.WriteLine("Mobile is valid : " + mobile);
+            else
+                Console.WriteLine("Invalid Mobile..");
         }
     }
 }
