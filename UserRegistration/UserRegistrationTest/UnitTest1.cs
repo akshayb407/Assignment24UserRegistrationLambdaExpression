@@ -5,47 +5,73 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 namespace UserRegistrationTest
 {
-    public class RegExValidation
+    [TestClass]
+    public class UnitTest1
     {
-        public static string REGEX_PATTERN = "^[A-Z]{1}[a-zA-Z]{2,}$";
-        public bool FirstNameVal(string fname)
+        private readonly RegExValidation reg;
+        public UnitTest1()
         {
-            Regex rg = new Regex(REGEX_PATTERN);
-            return rg.IsMatch(fname); ;
+            reg = new RegExValidation();
         }
-        public bool LastNameVal(string last_name)
+        [TestMethod]
+        public void FirstNameTest()
         {
-            Regex rg = new Regex(REGEX_PATTERN);
-            bool validate = rg.IsMatch(last_name);
-            return validate;
+            string name = "Vallem";
+            bool result = reg.FirstNameVal(name);
+            Assert.AreEqual(true, result);
         }
-        public bool EmailValidation(string email)
+        [TestMethod]
+        public void LastNameTest()
         {
-            string EMAIL_PATTERN = "^[a-zA-Z0-9]+[.(a-zA-Z0-9)]*(\\@)[a-zA-Z0-9]+(\\.)[a-z]{2,3}[.(a-z)]*$";
-            Regex rg = new Regex(EMAIL_PATTERN);
-            bool validate = rg.IsMatch(email);
-            return validate;
+            string name = "Balu";
+            bool result = reg.LastNameVal(name);
+            Assert.AreEqual(true, result);
         }
-        public bool MobileValidation(string mobile)
+        [TestMethod]
+        public void EmailTest()
         {
-            string MobilePattern = "^(91){1}[ ]+[0-9]{10}$";
-            Regex rg = new Regex(MobilePattern);
-            bool validate = rg.IsMatch(mobile);
-            return validate;
+            string email = "vbn@gmail.com";
+            string email2 = "vbn.vbn@gmail.com";
+            string email3 = "vbn.vbn@gmail.co.in";
+            string email4 = "vbn.vbn3434@gmail.com";
+            string email5 = "vbn.reddy@gmail.com.in";
+            bool result = reg.EmailValidation(email);
+            bool result2 = reg.EmailValidation(email2);
+            bool result3 = reg.EmailValidation(email3);
+            bool result4 = reg.EmailValidation(email4);
+            bool result5 = reg.EmailValidation(email5);
+            Assert.AreEqual(true, result);
+            Assert.AreEqual(true, result2);
+            Assert.AreEqual(true, result3);
+            Assert.AreEqual(true, result4);
+            Assert.AreEqual(true, result5);
         }
-        public bool PasswordRule(string password)
+        [TestMethod]
+        public void MobileTest()
         {
-            string PasswordPattern = "^(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9].{8,}$";
-            Regex rg = new Regex(PasswordPattern);
-            bool validate = rg.IsMatch(password);
-            return validate;
+            string mobile = "91 9492407489";
+            bool result = reg.MobileValidation(mobile);
+            Assert.AreEqual(true, result);
         }
-        public bool MessageCheck(string Message)
+        [TestMethod]
+        public void PasswordTest()
         {
-            var MessagePattern = "Happy";
-            Regex rg = new Regex(MessagePattern);
-            bool validate = rg.IsMatch(Message);
-            return validate;
+            string password = "VbnReddys@123v";
+            bool result = reg.PasswordRule(password);
+            Assert.AreEqual(true, result);
+        }
+        [TestMethod]
+        public void Happy_Test()
+        {
+            var Result = reg.MessageCheck("Happy");
+            Assert.AreEqual(true, Result);
+        }
+        [TestMethod]
+        public void MultipleEmailTest()
+        {
+            var Result = reg.CheckMultipleEmail("vbn@gmail.com", "vbn.vbn@gmail.com", "vbn234@gmail.com");
+            string check = "succesfull";
+            Assert.AreEqual(check, Result);
         }
     }
 }
