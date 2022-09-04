@@ -10,6 +10,7 @@ namespace UserRegistration
         {
             Console.WriteLine("Welcome_To_UserRegistration_RegeEx");
             FirstNameVal();
+            LastNameVal();
         }
         public static void FirstNameVal()
         {
@@ -21,7 +22,17 @@ namespace UserRegistration
                 Console.WriteLine("Name is Valid : " + first_name);
             else
                 Console.WriteLine("Invalid FirstName");
-
+        }
+        public static void LastNameVal()
+        {
+            Regex rg = new Regex(REGEX_PATTERN);
+            Console.Write("Enter Last Name: ");
+            string last_name = Console.ReadLine();
+            bool validate = rg.IsMatch(last_name);
+            if (validate)
+                Console.WriteLine("Name is Valid : " + last_name);
+            else
+                Console.WriteLine("Invalid LastName");
         }
     }
 }
